@@ -1,0 +1,9 @@
+obj/
+bin/
+data/
+
+.Makefile.swp
+*.json
+*.bin
+
+.cache/
