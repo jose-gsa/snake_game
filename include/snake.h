@@ -3,14 +3,13 @@
 
 class Snake {
 
-  typedef struct Node {
+  struct Node {
 
     int pos_x;
     int pos_y;
     struct Node *prev;
     struct Node *next;
-
-  } Node;
+  };
 
   Node *head; // start of list
   Node *tail; // end of list
@@ -34,8 +33,19 @@ public:
 
     size = 2;
   }
-  ~Snake() = default;
+  ~Snake() {
+
+    Node *temp = head;
+
+    while (head->next != nullptr) {
+
+      head = head->next;
+      delete temp;
+      temp = head;
+    }
+
+    delete head;
+  }
 };
 
 #endif // !SNAKE_H
-#define SNAKE_H
