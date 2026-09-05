@@ -1,4 +1,5 @@
 #include "snake.h"
+#include <vector>
 
 Snake::Snake(int x, int y) {
 
@@ -95,3 +96,14 @@ void Snake::turn(Direction dir) {
 }
 
 void Snake::move() { Snake::turn(this->actualDirection); }
+
+void Snake::copyPositions(std::vector<Position> &buffer) const {
+
+  Node *actual = this->head;
+  buffer.clear();
+
+  while (actual != nullptr) {
+    buffer.push_back({actual->pos_x, actual->pos_y});
+    actual = actual->next;
+  }
+}

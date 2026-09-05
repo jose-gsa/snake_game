@@ -1,6 +1,13 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
+#include <vector>
+
+struct Position {
+  int x;
+  int y;
+};
+
 enum class Direction { Up, Down, Left, Right };
 
 class Snake {
@@ -24,6 +31,7 @@ public:
   void grow(int x, int y);
   void turn(Direction dir);
   void move();
+  void copyPositions(std::vector<Position> &buffer) const;
 };
 
 #endif // !SNAKE_H
