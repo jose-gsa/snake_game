@@ -30,3 +30,14 @@ Snake::~Snake() {
 
   delete head;
 }
+
+void Snake::grow(int x, int y) {
+
+  Node *new_head = new Node;
+  new_head->pos_x = x;
+  new_head->pos_y = y;
+  new_head->prev = this->head;
+
+  this->head->prev = new_head;
+  this->head = new_head;
+}

@@ -18,6 +18,7 @@ class Snake {
 public:
   Snake(int x, int y);
   ~Snake();
+  void grow(int x, int y);
 };
 
 #endif // !SNAKE_H
