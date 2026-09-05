@@ -1,4 +1,5 @@
 #include "snake.h"
+#include <stdexcept>
 
 Snake::Snake(int x, int y) {
 
@@ -36,8 +37,60 @@ void Snake::grow(int x, int y) {
   Node *new_head = new Node;
   new_head->pos_x = x;
   new_head->pos_y = y;
-  new_head->prev = this->head;
+  new_head->next = this->head;
+  new_head->prev = nullptr;
 
   this->head->prev = new_head;
   this->head = new_head;
+}
+
+void Snake::turn(Direction dir) {
+
+  // Snake cannot turn 180 degres
+  if (this->actualDirection == Direction::Up && dir == Direction::Down) {
+
+    return;
+  }
+  if (this->actualDirection == Direction::Left && dir == Direction::Right) {
+
+    return;
+  }
+  if (this->actualDirection == Direction::Right && dir == Direction::Left) {
+
+    return;
+  }
+  if (this->actualDirection == Direction::Down && dir == Direction::Up) {
+
+    return;
+  }
+
+  Node *new_head = new Node;
+  new_head->next = this->head;
+  this->head->prev = new_head;
+
+  new_head->pos_x = this->head->pos_x;
+  new_head->pos_y = this->head->pos_y;
+
+  if (dir == Direction::Up) {
+    new_head->pos_y--;
+  }
+  if (dir == Direction::Down) {
+    new_head->pos_y++;
+  }
+  if (dir == Direction::Left) {
+    new_head->pos_x--;
+  }
+  if (dir == Direction::Right) {
+    new_head->pos_x++;
+  }
+
+  this->head = new_head;
+
+  Node *temp = this->tail->prev;
+  delete this->tail;
+
+  this->tail = temp;
+  this->tail->next = nullptr;
+
+  this->actualDirection = dir;
 }
