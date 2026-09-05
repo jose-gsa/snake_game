@@ -23,6 +23,7 @@ public:
   ~Snake();
   void grow(int x, int y);
   void turn(Direction dir);
+  void move();
 };
 
 #endif // !SNAKE_H

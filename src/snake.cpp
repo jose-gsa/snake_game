@@ -1,5 +1,4 @@
 #include "snake.h"
-#include <stdexcept>
 
 Snake::Snake(int x, int y) {
 
@@ -94,3 +93,5 @@ void Snake::turn(Direction dir) {
 
   this->actualDirection = dir;
 }
+
+void Snake::move() { Snake::turn(this->actualDirection); }
