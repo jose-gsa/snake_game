@@ -17,6 +17,8 @@ Snake::Snake(int x, int y) {
   head->next = tail;
 
   size = 2;
+
+  this->mustGrow = false;
 }
 Snake::~Snake() {
 
@@ -32,16 +34,9 @@ Snake::~Snake() {
   delete head;
 }
 
-void Snake::grow(int x, int y) {
-
-  Node *new_head = new Node;
-  new_head->pos_x = x;
-  new_head->pos_y = y;
-  new_head->next = this->head;
-  new_head->prev = nullptr;
-
-  this->head->prev = new_head;
-  this->head = new_head;
+void Snake::grow() {
+  this->mustGrow = true;
+  this->size++;
 }
 
 void Snake::turn(Direction dir) {
@@ -86,11 +81,14 @@ void Snake::turn(Direction dir) {
 
   this->head = new_head;
 
-  Node *temp = this->tail->prev;
-  delete this->tail;
+  if (this->mustGrow == false) {
+    Node *temp = this->tail->prev;
+    delete this->tail;
+    this->tail = temp;
+    this->tail->next = nullptr;
+  }
 
-  this->tail = temp;
-  this->tail->next = nullptr;
+  this->mustGrow = false;
 
   this->actualDirection = dir;
 }

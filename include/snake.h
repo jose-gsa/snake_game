@@ -24,13 +24,14 @@ class Snake {
   Node *tail; // end of list
   unsigned size;
   Direction actualDirection;
+  bool mustGrow;
 
   bool col_rec(Node *actual);
 
 public:
   Snake(int x, int y);
   ~Snake();
-  void grow(int x, int y);
+  void grow();
   void turn(Direction dir);
   void move();
   void copyPositions(std::vector<Position> &buffer) const;
