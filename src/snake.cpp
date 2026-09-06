@@ -107,3 +107,24 @@ void Snake::copyPositions(std::vector<Position> &buffer) const {
     actual = actual->next;
   }
 }
+
+bool Snake::collided() {
+
+  Node *actual = this->head->next;
+
+  return col_rec(actual);
+}
+
+bool Snake::col_rec(Node *actual) {
+
+  if (actual == nullptr) {
+    return false;
+  }
+
+  if (actual->pos_x == this->head->pos_x &&
+      actual->pos_y == this->head->pos_y) {
+    return true;
+  }
+
+  return Snake::col_rec(actual->next);
+}

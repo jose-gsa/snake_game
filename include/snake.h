@@ -25,6 +25,8 @@ class Snake {
   unsigned size;
   Direction actualDirection;
 
+  bool col_rec(Node *actual);
+
 public:
   Snake(int x, int y);
   ~Snake();
@@ -32,6 +34,7 @@ public:
   void turn(Direction dir);
   void move();
   void copyPositions(std::vector<Position> &buffer) const;
+  bool collided();
 };
 
 #endif // !SNAKE_H
