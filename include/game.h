@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "snake.h"
+#include <vector>
 
 class Game {
 
@@ -19,6 +20,9 @@ public:
   ~Game() = default;
   void update();
   void processInput(Direction dir);
+
+  Position applePosition() const;
+  const std::vector<Position> &getSnakePositions() const;
 };
 
 #endif // !GAME_H

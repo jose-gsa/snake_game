@@ -2,6 +2,7 @@
 #include "snake.h"
 #include <cstdlib>
 #include <time.h>
+#include <vector>
 
 Game::Game(int x, int y)
     : map_width_X(x), map_height_Y(y), snake(x / 2, y / 2) {
@@ -64,4 +65,11 @@ void Game::spawnApple() {
 
   apple.x = x;
   apple.y = y;
+}
+
+Position Game::applePosition() const { return this->apple; }
+
+const std::vector<Position> &Game::getSnakePositions() const {
+
+  return this->snakePositions;
 }
