@@ -8,7 +8,7 @@ struct Position {
   int y;
 };
 
-enum class Direction { Up, Down, Left, Right };
+enum class Direction { Up, Down, Left, Right, None };
 
 class Snake {
 
