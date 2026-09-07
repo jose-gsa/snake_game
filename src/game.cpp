@@ -9,6 +9,9 @@ Game::Game(int x, int y)
   srand(time(NULL));
 
   this->gameOver = false;
+
+  this->snake.copyPositions(this->snakePositions);
+
   Game::spawnApple();
 }
 
@@ -26,7 +29,9 @@ void Game::update() {
 
   // snakePositions[0] is the coordinates from snake head
   if (this->snakePositions[0].x >= this->map_width_X ||
-      this->snakePositions[0].y >= this->map_height_Y) {
+      this->snakePositions[0].x < 0 ||
+      this->snakePositions[0].y >= this->map_height_Y ||
+      this->snakePositions[0].y < 0) {
     this->gameOver = true;
   }
 
