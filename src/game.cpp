@@ -1,8 +1,12 @@
 #include "game.h"
 #include "snake.h"
+#include <cstdlib>
+#include <time.h>
 
 Game::Game(int x, int y)
     : map_width_X(x), map_height_Y(y), snake(x / 2, y / 2) {
+
+  srand(time(NULL));
 
   this->gameOver = false;
   Game::spawnApple();
@@ -30,4 +34,29 @@ void Game::update() {
     snake.grow();
     spawnApple();
   }
+}
+
+void Game::spawnApple() {
+
+  int x;
+  int y;
+  bool collided;
+
+  do {
+
+    collided = false;
+
+    x = rand() % this->map_width_X;
+    y = rand() % this->map_height_Y;
+
+    for (size_t i = 0; i < snakePositions.size(); i++) {
+
+      if (x == snakePositions[i].x && y == snakePositions[i].y) {
+        collided = true;
+      }
+    }
+  } while (collided);
+
+  apple.x = x;
+  apple.y = y;
 }
