@@ -4,7 +4,30 @@
 Game::Game(int x, int y)
     : map_width_X(x), map_height_Y(y), snake(x / 2, y / 2) {
 
+  this->gameOver = false;
   Game::spawnApple();
 }
 
 void Game::processInput(Direction dir) { this->snake.turn(dir); }
+
+void Game::update() {
+
+  this->snake.move();
+
+  this->snake.copyPositions(this->snakePositions);
+
+  if (this->snake.collided()) {
+    this->gameOver = true;
+  }
+
+  // snakePositions[0] is the coordinates from snake head
+  if (this->snakePositions[0].x >= this->map_width_X ||
+      this->snakePositions[0].y >= this->map_height_Y) {
+    this->gameOver = true;
+  }
+
+  if (snakePositions[0].x == apple.x && snakePositions[0].y == apple.y) {
+    snake.grow();
+    spawnApple();
+  }
+}

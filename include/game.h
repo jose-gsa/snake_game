@@ -7,6 +7,7 @@ class Game {
 
   int map_width_X;
   int map_height_Y;
+  bool gameOver;
   Snake snake;
   Position apple;
   std::vector<Position> snakePositions;
