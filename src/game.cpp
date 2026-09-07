@@ -78,3 +78,5 @@ Position Game::mapCoordinates() const {
 
   return {this->map_width_X, this->map_height_Y};
 }
+
+bool Game::isGameOver() const { return this->gameOver; }

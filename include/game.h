@@ -23,6 +23,7 @@ public:
 
   Position applePosition() const;
   Position mapCoordinates() const;
+  bool isGameOver() const;
   const std::vector<Position> &getSnakePositions() const;
 };
 
