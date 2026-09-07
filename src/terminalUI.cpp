@@ -1,6 +1,7 @@
 #include "terminalUI.h"
 #include "snake.h"
 #include <ncurses.h>
+#include <vector>
 
 TerminalUI::TerminalUI() {
 
@@ -33,4 +34,35 @@ Direction TerminalUI::getInput() const {
   default:
     return Direction::None;
   }
+}
+
+void TerminalUI::drawFrame(const Game &game) const {
+
+  erase();
+
+  const auto &snake = game.getSnakePositions();
+  const auto map = game.mapCoordinates();
+
+  for (int i = 0; i < map.y; i++) {
+    for (int k = 0; k < map.x; k++) {
+
+      if (i == 0 || i == map.y - 1) {
+        mvaddch(i, k, '-');
+      }
+      if (k == 0 || k == map.x - 1) {
+        mvaddch(i, k, '|');
+      }
+    }
+  }
+
+  mvaddch(snake[0].y, snake[0].x, 'O');
+
+  for (size_t i = 1; i < snake.size(); i++) {
+
+    mvaddch(snake[i].y, snake[i].x, 'o');
+  }
+
+  mvaddch(game.applePosition().y, game.applePosition().x, '@');
+
+  refresh();
 }

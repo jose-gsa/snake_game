@@ -22,6 +22,7 @@ public:
   void processInput(Direction dir);
 
   Position applePosition() const;
+  Position mapCoordinates() const;
   const std::vector<Position> &getSnakePositions() const;
 };
 

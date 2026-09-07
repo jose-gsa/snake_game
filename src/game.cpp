@@ -73,3 +73,8 @@ const std::vector<Position> &Game::getSnakePositions() const {
 
   return this->snakePositions;
 }
+
+Position Game::mapCoordinates() const {
+
+  return {this->map_width_X, this->map_height_Y};
+}
