@@ -6,3 +6,5 @@ Game::Game(int x, int y)
 
   Game::spawnApple();
 }
+
+void Game::processInput(Direction dir) { this->snake.turn(dir); }
