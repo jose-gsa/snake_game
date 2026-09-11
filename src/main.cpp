@@ -4,9 +4,12 @@
 #include <chrono>
 #include <thread>
 
+#define MAP_SIZE_X 30
+#define MAP_SIZE_Y 30
+
 int main() {
 
-  Game game(30, 30);
+  Game game(MAP_SIZE_X, MAP_SIZE_Y);
   TerminalUI ui;
 
   while (!game.isGameOver()) {

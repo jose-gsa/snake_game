@@ -30,9 +30,9 @@ void Game::update() {
 
   // snakePositions[0] is the coordinates from snake head
   if (this->snakePositions[0].x >= this->map_width_X ||
-      this->snakePositions[0].x < 0 ||
+      this->snakePositions[0].x <= 0 ||
       this->snakePositions[0].y >= this->map_height_Y ||
-      this->snakePositions[0].y < 0) {
+      this->snakePositions[0].y <= 0) {
     this->gameOver = true;
   }
 
@@ -52,8 +52,8 @@ void Game::spawnApple() {
 
     collided = false;
 
-    x = rand() % this->map_width_X;
-    y = rand() % this->map_height_Y;
+    x = 1 + rand() % (this->map_width_X - 1);
+    y = 1 + rand() % (this->map_height_Y - 1);
 
     for (size_t i = 0; i < snakePositions.size(); i++) {
 
