@@ -43,25 +43,30 @@ void TerminalUI::drawFrame(const Game &game) const {
   const auto &snake = game.getSnakePositions();
   const auto map = game.mapCoordinates();
 
-  for (int i = 0; i < map.y; i++) {
-    for (int k = 0; k < map.x; k++) {
+  // Draw the map
+  for (int i = 0; i <= map.y; i++) {
+    for (int k = 0; k <= map.x; k++) {
 
-      if (i == 0 || i == map.y - 1) {
+      if ((i == 0 || i == map.y) && (k == 0 || k == map.y)) {
+        mvaddch(i, k, '+');
+      } else if (i == 0 || i == map.y) {
         mvaddch(i, k, '-');
-      }
-      if (k == 0 || k == map.x - 1) {
+      } else if (k == 0 || k == map.x) {
         mvaddch(i, k, '|');
       }
     }
   }
 
-  mvaddch(snake[0].y, snake[0].x, 'O');
+  // Draw Snake
+  mvaddch(snake[0].y, snake[0].x, 'O'); // Head
 
+  // Body
   for (size_t i = 1; i < snake.size(); i++) {
 
     mvaddch(snake[i].y, snake[i].x, 'o');
   }
 
+  // Draw Apple
   mvaddch(game.applePosition().y, game.applePosition().x, '@');
 
   refresh();
