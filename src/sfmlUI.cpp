@@ -4,6 +4,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+bool SfmlUI::isOpen() const { return this->window.isOpen(); }
+
 Direction SfmlUI::getInput() {
 
   while (const std::optional<sf::Event> event = this->window.pollEvent()) {
