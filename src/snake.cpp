@@ -59,6 +59,11 @@ void Snake::turn(Direction dir) {
     return;
   }
 
+  this->actualDirection = dir;
+}
+
+void Snake::move() {
+
   Node *new_head = new Node;
   new_head->next = this->head;
   this->head->prev = new_head;
@@ -66,16 +71,16 @@ void Snake::turn(Direction dir) {
   new_head->pos_x = this->head->pos_x;
   new_head->pos_y = this->head->pos_y;
 
-  if (dir == Direction::Up) {
+  if (this->actualDirection == Direction::Up) {
     new_head->pos_y--;
   }
-  if (dir == Direction::Down) {
+  if (this->actualDirection == Direction::Down) {
     new_head->pos_y++;
   }
-  if (dir == Direction::Left) {
+  if (this->actualDirection == Direction::Left) {
     new_head->pos_x--;
   }
-  if (dir == Direction::Right) {
+  if (this->actualDirection == Direction::Right) {
     new_head->pos_x++;
   }
 
@@ -89,11 +94,7 @@ void Snake::turn(Direction dir) {
   }
 
   this->mustGrow = false;
-
-  this->actualDirection = dir;
 }
-
-void Snake::move() { Snake::turn(this->actualDirection); }
 
 void Snake::copyPositions(std::vector<Position> &buffer) const {
 
