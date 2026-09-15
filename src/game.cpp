@@ -52,8 +52,8 @@ void Game::spawnApple() {
 
     collided = false;
 
-    x = 1 + rand() % (this->map_width_X - 1);
-    y = 1 + rand() % (this->map_height_Y - 1);
+    x = rand() % this->map_width_X;
+    y = rand() % this->map_height_Y;
 
     for (size_t i = 0; i < snakePositions.size(); i++) {
 
