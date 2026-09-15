@@ -4,6 +4,15 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+SfmlUI::SfmlUI(int mapWidth, int mapHeight, int tileSize)
+    : tileSize(tileSize),
+      window(sf::VideoMode({(unsigned int)(mapWidth * tileSize),
+                            (unsigned int)(mapHeight * tileSize)}),
+             "Snake Game") {
+
+  window.setFramerateLimit(10);
+}
+
 bool SfmlUI::isOpen() const { return this->window.isOpen(); }
 
 Direction SfmlUI::getInput() {
