@@ -100,12 +100,11 @@ void SfmlUI::drawFrame(const Game &game) {
   sf::RectangleShape block({(float)this->tileSize, (float)this->tileSize});
 
   // Draw Apple
-  block.setFillColor(sf::Color::Red);
+  this->spriteApple.setPosition(
+      {(float)(game.applePosition().x * this->tileSize),
+       (float)(game.applePosition().y * this->tileSize)});
 
-  block.setPosition({(float)(game.applePosition().x * this->tileSize),
-                     (float)(game.applePosition().y * this->tileSize)});
-
-  this->window.draw(block);
+  this->window.draw(spriteApple);
 
   // Draw Snake
   block.setFillColor(sf::Color::Blue);
