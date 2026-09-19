@@ -1,6 +1,7 @@
 #include "sfmlUI.h"
 #include "snake.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
@@ -8,9 +9,44 @@ SfmlUI::SfmlUI(int mapWidth, int mapHeight, int tileSize)
     : window(sf::VideoMode({(unsigned int)(mapWidth * tileSize),
                             (unsigned int)(mapHeight * tileSize)}),
              "Snake Game"),
-      tileSize(tileSize) {
+      tileSize(tileSize), spriteApple(textureApple),
+      spriteSnakeHead(textureSnakeHead), spriteSnakeBody(textureSnakeBody),
+      spriteSnakeTurn(textureSnakeTurn), spriteSnakeTail(textureSnakeTail),
+      spriteGrassLight(textureGrassLight), spriteGrassDark(textureGrassDark) {
 
   window.setFramerateLimit(10);
+
+  textureApple.loadFromFile("assets/apple.png");
+  textureApple.setSmooth(false);
+
+  float scaleX = (float)tileSize / textureApple.getSize().x;
+  float scaleY = (float)tileSize / textureApple.getSize().y;
+
+  spriteApple.setScale({scaleX, scaleY});
+
+  textureSnakeHead.loadFromFile("assets/head.png");
+  textureSnakeHead.setSmooth(false);
+  spriteSnakeHead.setScale({scaleX, scaleY});
+
+  textureSnakeBody.loadFromFile("assets/body.png");
+  textureSnakeBody.setSmooth(false);
+  spriteSnakeBody.setScale({scaleX, scaleY});
+
+  textureSnakeTail.loadFromFile("assets/tail.png");
+  textureSnakeTail.setSmooth(false);
+  spriteSnakeTail.setScale({scaleX, scaleY});
+
+  textureSnakeTurn.loadFromFile("assets/turn.png");
+  textureSnakeTurn.setSmooth(false);
+  spriteSnakeTurn.setScale({scaleX, scaleY});
+
+  textureGrassLight.loadFromFile("assets/grass2.png");
+  textureGrassLight.setSmooth(false);
+  spriteGrassLight.setScale({scaleX, scaleY});
+
+  textureGrassDark.loadFromFile("assets/grass1.png");
+  textureGrassDark.setSmooth(false);
+  spriteGrassDark.setScale({scaleX, scaleY});
 }
 
 bool SfmlUI::isOpen() const { return this->window.isOpen(); }
