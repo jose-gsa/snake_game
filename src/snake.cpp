@@ -19,6 +19,7 @@ Snake::Snake(int x, int y) {
   size = 2;
 
   this->mustGrow = false;
+  this->actualDirection = Direction::Left;
 }
 Snake::~Snake() {
 
