@@ -95,9 +95,26 @@ Direction SfmlUI::getInput() {
 
 void SfmlUI::drawFrame(const Game &game) {
 
-  this->window.clear(sf::Color::Black);
-
   sf::RectangleShape block({(float)this->tileSize, (float)this->tileSize});
+
+  auto const map = game.mapCoordinates();
+
+  for (int y = 0; y < map.y; y++) {
+    for (int x = 0; x < map.x; x++) {
+
+      if ((x + y) % 2 == 0) {
+
+        this->spriteGrassLight.setPosition(
+            {(float)(x * this->tileSize), (float)(y * this->tileSize)});
+        this->window.draw(spriteGrassLight);
+
+      } else {
+        this->spriteGrassDark.setPosition(
+            {(float)(x * this->tileSize), (float)(y * this->tileSize)});
+        this->window.draw(spriteGrassDark);
+      }
+    }
+  }
 
   // Draw Apple
   this->spriteApple.setPosition(
