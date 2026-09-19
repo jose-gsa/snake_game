@@ -1,9 +1,9 @@
 #include "sfmlUI.h"
 #include "snake.h"
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+#include <stdexcept>
 
 SfmlUI::SfmlUI(int mapWidth, int mapHeight, int tileSize)
     : window(sf::VideoMode({(unsigned int)(mapWidth * tileSize),
@@ -16,36 +16,58 @@ SfmlUI::SfmlUI(int mapWidth, int mapHeight, int tileSize)
 
   window.setFramerateLimit(10);
 
-  textureApple.loadFromFile("assets/apple.png");
+  if (!textureApple.loadFromFile("assets/apple.png")) {
+    throw std::runtime_error("Could not load assets/apple.png");
+  }
   textureApple.setSmooth(false);
+  spriteApple.setTexture(textureApple, true);
 
+  // All assets are 16x16
   float scaleX = (float)tileSize / textureApple.getSize().x;
   float scaleY = (float)tileSize / textureApple.getSize().y;
 
   spriteApple.setScale({scaleX, scaleY});
 
-  textureSnakeHead.loadFromFile("assets/head.png");
+  if (!textureSnakeHead.loadFromFile("assets/head.png")) {
+    throw std::runtime_error("Could not load assets/head.png");
+  }
   textureSnakeHead.setSmooth(false);
+  spriteSnakeHead.setTexture(textureSnakeHead, true);
   spriteSnakeHead.setScale({scaleX, scaleY});
 
-  textureSnakeBody.loadFromFile("assets/body.png");
+  if (!textureSnakeBody.loadFromFile("assets/body.png")) {
+    throw std::runtime_error("Could not load assets/body.png");
+  }
   textureSnakeBody.setSmooth(false);
+  spriteSnakeBody.setTexture(textureSnakeBody, true);
   spriteSnakeBody.setScale({scaleX, scaleY});
 
-  textureSnakeTail.loadFromFile("assets/tail.png");
+  if (!textureSnakeTail.loadFromFile("assets/tail.png")) {
+    throw std::runtime_error("Could not load assets/tail.png");
+  }
   textureSnakeTail.setSmooth(false);
+  spriteSnakeTail.setTexture(textureSnakeTail, true);
   spriteSnakeTail.setScale({scaleX, scaleY});
 
-  textureSnakeTurn.loadFromFile("assets/turn.png");
+  if (!textureSnakeTurn.loadFromFile("assets/turn.png")) {
+    throw std::runtime_error("Could not load assets/turn.png");
+  }
   textureSnakeTurn.setSmooth(false);
+  spriteSnakeTurn.setTexture(textureSnakeTurn, true);
   spriteSnakeTurn.setScale({scaleX, scaleY});
 
-  textureGrassLight.loadFromFile("assets/grass2.png");
+  if (!textureGrassLight.loadFromFile("assets/grass2.png")) {
+    throw std::runtime_error("Could not load assets/grass2.png");
+  }
   textureGrassLight.setSmooth(false);
+  spriteGrassLight.setTexture(textureGrassLight, true);
   spriteGrassLight.setScale({scaleX, scaleY});
 
-  textureGrassDark.loadFromFile("assets/grass1.png");
+  if (!textureGrassDark.loadFromFile("assets/grass1.png")) {
+    throw std::runtime_error("Could not load assets/grass1.png");
+  }
   textureGrassDark.setSmooth(false);
+  spriteGrassDark.setTexture(textureGrassDark, true);
   spriteGrassDark.setScale({scaleX, scaleY});
 }
 
