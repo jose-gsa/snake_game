@@ -1,9 +1,7 @@
 #include "game.h"
 #include "sfmlUI.h"
 #include "snake.h"
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
+#include <iostream>
 
 #define MAP_SIZE_X 20
 #define MAP_SIZE_Y 20
@@ -15,20 +13,23 @@ int main() {
   SfmlUI ui(MAP_SIZE_X, MAP_SIZE_Y, TILE_SIZE);
 
   while (ui.isOpen()) {
+    try {
+      Direction dir = ui.getInput();
 
-    Direction dir = ui.getInput();
+      if (dir != Direction::None) {
+        game.processInput(dir);
+      }
+      game.update();
 
-    if (dir != Direction::None) {
-      game.processInput(dir);
+      if (game.isGameOver()) {
+        break;
+      }
+
+      ui.drawFrame(game);
+    } catch (const std::exception &error) {
+      std::cerr << "Error running the game: " << error.what() << std::endl;
+      return 1;
     }
-    game.update();
-
-    if (game.isGameOver()) {
-      break;
-    }
-
-    ui.drawFrame(game);
   }
-
   return 0;
 }
